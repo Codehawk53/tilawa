@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تلاوة — Tilawa</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   @font-face {
     font-family: 'UthmanicHafs';
-    src: url('UthmanicHafs_V22.woff2') format('woff2');
+    src: url('UthmanicHafs1Ver18.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -16,32 +16,20 @@
 </style>
 <style>
   :root {
-    /* Midnight Premium Palette */
-    --bg: #0a0c10;
-    --surface: rgba(23, 27, 34, 0.7);
-    --surface-solid: #171b22;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-bright: rgba(255, 255, 255, 0.15);
-    
-    --text-dim: #3d444d;
-    --text-muted: #8b949e;
-    --text-inactive: #484f58;
-    --text-active: #c9d1d9;
-    --text-bright: #f0f6fc;
-    
-    --accent: #e2b96f;
-    --accent-glow: rgba(226, 185, 111, 0.3);
+    --bg: #1a1a1a;
+    --surface: #232323;
+    --border: #2e2e2e;
+    --text-dim: #3a3a3a;
+    --text-muted: #555;
+    --text-inactive: #666;
+    --text-active: #d1d1d1;
+    --text-bright: #f0ede6;
     --cursor: #e2b96f;
-    
-    --correct: #4ade80;
-    --correct-glow: rgba(74, 222, 128, 0.2);
-    --incorrect: #f87171;
-    --incorrect-glow: rgba(248, 113, 113, 0.2);
-    
+    --correct: #6a9e6a;
+    --incorrect: #9e5a5a;
+    --accent: #e2b96f;
     --font-arabic: 'UthmanicHafs', 'Amiri', serif;
-    --font-ui: 'Outfit', 'Inter', sans-serif;
-    
-    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-ui: 'Inter', sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,191 +44,143 @@
     align-items: center;
     justify-content: center;
     overflow-x: hidden;
-    transition: background 0.5s ease;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    top: -10%; left: -10%;
-    width: 120%; height: 120%;
-    background: radial-gradient(circle at 50% 50%, rgba(226, 185, 111, 0.03) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: -1;
   }
 
   /* Header */
   .header {
     position: fixed;
     top: 0; left: 0; right: 0;
-    padding: 24px 48px;
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    transition: var(--transition);
-  }
-
-  .header.focus-mode {
-    transform: translateY(-100%);
-    opacity: 0;
   }
 
   .logo {
-    font-family: var(--font-ui);
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-bright);
-    letter-spacing: -0.5px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .logo-icon {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, var(--accent), #b38e4d);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--bg);
     font-family: var(--font-arabic);
-    font-size: 18px;
-    box-shadow: 0 4px 12px var(--accent-glow);
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    direction: rtl;
   }
 
   .logo span {
     color: var(--text-muted);
-    font-size: 12px;
-    font-weight: 400;
-    margin-left: 4px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 13px;
+    font-family: var(--font-ui);
+    margin-right: 10px;
+    font-weight: 300;
+    direction: ltr;
   }
 
   .stats-bar {
     display: flex;
-    gap: 32px;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 300;
     direction: ltr;
   }
 
-  .stat { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
-  .stat-value { color: var(--text-bright); font-size: 18px; font-weight: 600; }
-  .stat-label { 
-    font-size: 10px; 
-    color: var(--text-muted);
-    text-transform: uppercase; 
-    letter-spacing: 1.5px; 
-    font-weight: 500;
-  }
+  .stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .stat-value { color: var(--accent); font-size: 16px; font-weight: 500; }
+  .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
 
   /* Main container */
-  .container {
+  .main {
     width: 100%;
-    max-width: 1000px;
-    margin-top: 80px;
-    margin-bottom: 120px;
-    padding: 40px;
+    max-width: 900px;
+    padding: 20px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 48px;
-    position: relative;
+    gap: 40px;
   }
 
-  /* Surah selector panel */
-  .surah-panel {
+  /* Surah selector */
+  .surah-selector {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    direction: ltr;
+  }
+
+  .surah-selector select {
     background: var(--surface);
     border: 1px solid var(--border);
-    padding: 12px 24px;
-    border-radius: 100px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    backdrop-filter: blur(8px);
-    transition: var(--transition);
-  }
-
-  .surah-panel select {
-    background: none;
-    border: none;
-    color: var(--text-bright);
+    color: var(--text-active);
+    padding: 8px 16px;
+    border-radius: 6px;
     font-family: var(--font-ui);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
     outline: none;
     cursor: pointer;
-    padding-right: 8px;
+    transition: border-color 0.2s;
   }
 
-  .btn-icon {
+  .surah-selector select:focus { border-color: var(--accent); }
+
+  .btn-restart {
     background: none;
-    border: none;
-    color: var(--text-muted);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-    padding: 8px;
-    border-radius: 50%;
-  }
-
-  .btn-icon:hover {
-    color: var(--accent);
-    background: rgba(226, 185, 111, 0.1);
-  }
-
-  /* Status indicator */
-  .status-badge {
-    padding: 6px 16px;
-    background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 11px;
     color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-weight: 600;
+  }
+
+  .btn-restart:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Status indicator */
+  .status {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    direction: ltr;
+    height: 20px;
+    transition: color 0.3s;
   }
 
   .status-dot {
     width: 6px; height: 6px;
     border-radius: 50%;
-    background: var(--text-inactive);
-    transition: var(--transition);
+    background: var(--text-dim);
+    transition: background 0.3s;
   }
 
-  .listening .status-dot {
-    background: var(--correct);
-    box-shadow: 0 0 10px var(--correct-glow);
-    animation: statusPulse 2s infinite;
+  .status.listening .status-dot {
+    background: #6a9e6a;
+    box-shadow: 0 0 8px #6a9e6a88;
+    animation: pulse 1.5s infinite;
   }
 
-  @keyframes statusPulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 0.5; }
-    100% { transform: scale(1); opacity: 1; }
+  .status.listening { color: var(--text-active); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
   }
 
-  /* Reading Experience */
-  .words-viewport {
+  /* Words display — three lines visible */
+  .words-container {
     width: 100%;
-    height: 400px;
+    direction: rtl;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
+    height: 320px;
+    overflow: visible;
   }
 
+  /* Three lines: prev (fading out top), current, next (fading out bottom) */
   .ayah-line {
     position: absolute;
     width: 100%;
@@ -248,418 +188,413 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 12px 0px;
+    gap: 4px 0px;
     direction: rtl;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
     font-family: var(--font-arabic);
-    font-size: 42px;
-    line-height: 2;
-    transition: var(--transition);
-    padding: 24px 0;
+    font-size: 34px;
+    line-height: 1.8;
+    padding: 8px 0;
   }
 
   .ayah-line.line-prev {
-    transform: translateY(-120%) scale(0.9);
-    opacity: 0.15;
-    filter: blur(2px);
+    transform: translateY(-110%);
+    opacity: 0.45;
+    pointer-events: none;
   }
 
+  /* Keep correct/incorrect colors vivid even in prev/next lines */
+  .ayah-line.line-prev .word.correct,
+  .ayah-line.line-next .word.correct { color: var(--correct); opacity: 1; }
+  .ayah-line.line-prev .word.incorrect,
+  .ayah-line.line-next .word.incorrect { color: var(--incorrect); opacity: 1; }
+
   .ayah-line.line-current {
-    transform: translateY(0%) scale(1);
+    transform: translateY(0%);
     opacity: 1;
   }
 
   .ayah-line.line-next {
-    transform: translateY(120%) scale(0.85);
-    opacity: 0.25;
-    filter: blur(1px);
+    transform: translateY(110%);
+    opacity: 0.35;
+    pointer-events: none;
   }
 
   .word {
-    padding: 4px 8px;
-    color: var(--text-dim);
-    border-radius: 12px;
-    transition: var(--transition);
     position: relative;
-  }
-
-  .word.current { 
-    color: var(--text-bright);
-    background: rgba(255, 255, 255, 0.03);
+    display: inline-block;
+    color: var(--text-dim);
+    padding: 0 6px;
+    transition: color 0.15s;
+    cursor: default;
+    border-radius: 4px;
+    white-space: nowrap;
   }
 
   .word.correct { color: var(--correct); }
   .word.incorrect { color: var(--incorrect); }
+  .word.current { color: var(--text-bright); }
 
-  /* Animated Cursor */
-  .word.current::after {
+  /* Cursor — blinking line on right side of current word (RTL) */
+  .word.current::before {
     content: '';
     position: absolute;
-    bottom: 8px;
-    left: 10%;
-    width: 80%;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 2px;
-    box-shadow: 0 0 8px var(--accent-glow);
-    animation: cursorBreath 2s ease-in-out infinite;
+    right: -1px;
+    top: 15%;
+    height: 70%;
+    width: 2px;
+    background: var(--cursor);
+    border-radius: 1px;
+    animation: blink 1s step-end infinite;
   }
 
-  @keyframes cursorBreath {
-    0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
-    50% { opacity: 1; transform: scaleX(1); }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 
+  /* Ayah number badge inside circle */
   .ayah-marker {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    margin: 0 16px;
-    position: relative;
-    color: var(--accent);
     font-family: var(--font-arabic);
-    font-size: 18px;
+    font-size: 16px;
+    color: var(--accent);
+    opacity: 0.7;
+    margin: 0 6px;
+    position: relative;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
   }
 
+  .ayah-marker svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+
+  .ayah-marker span {
+    position: relative;
+    z-index: 1;
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  /* Current ayah label */
   .ayah-label {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-muted);
-    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: -20px;
-    opacity: 0.6;
+    letter-spacing: 1.5px;
+    direction: ltr;
+    text-align: center;
   }
 
-  /* Controls Section */
-  .controls-dock {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 12px 24px;
-    border-radius: 100px;
+  /* Mic button */
+  .controls {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 32px;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-    z-index: 1000;
-    transition: var(--transition);
-  }
-
-  .controls-dock.focus-mode {
-    opacity: 0.2;
-    transform: translateX(-50%) translateY(20px);
-  }
-
-  .controls-dock:hover {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    gap: 16px;
+    direction: ltr;
   }
 
   .mic-btn {
-    width: 64px;
-    height: 64px;
+    width: 56px; height: 56px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #232936, #171b22);
-    border: 1px solid var(--border-bright);
-    color: var(--text-active);
+    border: 2px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition);
-    position: relative;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  }
-
-  .mic-btn::before {
-    content: '';
-    position: absolute;
-    top: -2px; left: -2px; right: -2px; bottom: -2px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), transparent);
-    z-index: -1;
-    opacity: 0;
-    transition: var(--transition);
+    transition: all 0.2s;
+    outline: none;
   }
 
   .mic-btn:hover {
-    color: var(--accent);
-    transform: translateY(-2px);
     border-color: var(--accent);
+    color: var(--accent);
   }
 
   .mic-btn.active {
-    background: var(--bg);
-    color: var(--correct);
-    border-color: var(--correct);
-    box-shadow: 0 0 20px var(--correct-glow);
+    border-color: #6a9e6a;
+    color: #6a9e6a;
+    box-shadow: 0 0 20px #6a9e6a33;
+    animation: micpulse 2s infinite;
   }
 
-  .mic-btn.active::after {
-    content: '';
-    position: absolute;
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    border: 2px solid var(--correct);
-    animation: ripple 2s linear infinite;
+  @keyframes micpulse {
+    0%, 100% { box-shadow: 0 0 20px #6a9e6a33; }
+    50% { box-shadow: 0 0 30px #6a9e6a66; }
   }
 
-  @keyframes ripple {
-    0% { transform: scale(1); opacity: 0.8; }
-    100% { transform: scale(2); opacity: 0; }
+  .mic-btn svg { width: 22px; height: 22px; }
+
+  .hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
   }
 
-  .progress-ring {
-    width: 40px;
-    height: 40px;
-    position: relative;
+  /* Progress */
+  .progress-bar {
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    border-radius: 1px;
+    overflow: hidden;
+    direction: ltr;
   }
 
-  /* Completion Premium Screen */
-  .completion-overlay {
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 1px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  /* Notification toast */
+  .toast {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--bg);
-    z-index: 2000;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-active);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: var(--font-ui);
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    direction: ltr;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Loading */
+  .loading {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: var(--font-ui);
+    direction: ltr;
+    letter-spacing: 1px;
+  }
+
+  /* Completion */
+  .completion {
     display: none;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 40px;
-    opacity: 0;
-    transition: opacity 0.8s ease;
+    gap: 12px;
+    direction: ltr;
   }
 
-  .completion-overlay.show {
-    display: flex;
-    opacity: 1;
-  }
-
-  .completion-card {
-    text-align: center;
-    animation: cardEntry 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  @keyframes cardEntry {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+  .completion.show { display: flex; }
 
   .completion-title {
     font-family: var(--font-arabic);
-    font-size: 64px;
+    font-size: 28px;
     color: var(--accent);
-    margin-bottom: 16px;
-    text-shadow: 0 10px 30px var(--accent-glow);
+    direction: rtl;
   }
 
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px;
-    margin-top: 48px;
-  }
-
-  .grid-item { text-align: center; }
-  .grid-val { font-size: 32px; font-weight: 600; color: var(--text-bright); }
-  .grid-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-top: 8px; }
-
-  /* Utility */
-  .toast {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-20px);
-    background: var(--surface-solid);
-    border: 1px solid var(--accent);
-    color: var(--text-bright);
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    opacity: 0;
-    transition: var(--transition);
-    z-index: 3000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
-
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  .shortcuts-hint {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    font-size: 11px;
-    color: var(--text-inactive);
+  .completion-stats {
     display: flex;
-    gap: 16px;
+    gap: 32px;
   }
-  
-  .key-cap {
-    background: rgba(255,255,255,0.05);
+
+  .c-stat { text-align: center; }
+  .c-stat-value { font-size: 28px; color: var(--text-bright); font-weight: 300; }
+  .c-stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+  /* Keyboard shortcut hint */
+  .shortcuts {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--text-dim);
+    direction: ltr;
+  }
+
+  .key {
+    background: var(--surface);
     border: 1px solid var(--border);
     padding: 2px 6px;
-    border-radius: 4px;
-    margin-right: 4px;
-    font-family: monospace;
+    border-radius: 3px;
+    font-size: 10px;
+    color: var(--text-muted);
   }
-
-  /* Settings Modal */
-  .modal-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(8px);
-    z-index: 4000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modal {
-    background: var(--surface-solid);
-    border: 1px solid var(--border-bright);
-    width: 400px;
-    border-radius: 24px;
-    padding: 32px;
-    position: relative;
-  }
-
-  .modal-title { font-size: 20px; font-weight: 600; margin-bottom: 24px; color: var(--text-bright); }
-  .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-  .setting-label { font-size: 14px; color: var(--text-active); }
-  
-  /* Custom Range Slider */
-  input[type=range] { width: 150px; }
 </style>
 </head>
 <body>
 
-<header class="header" id="header">
-  <div class="logo">
-    <div class="logo-icon">ت</div>
-     Tilawa <span>beta</span>
-  </div>
-  
-  <div class="stats-bar" id="statsBar">
+<header class="header">
+  <div class="logo">تلاوة <span>tilawa</span></div>
+  <div class="stats-bar" id="statsBar" style="display:none">
     <div class="stat">
-      <div class="stat-label">accuracy</div>
-      <div class="stat-value" id="statAccuracy">0%</div>
+      <div class="stat-value" id="statCorrect">0</div>
+      <div class="stat-label">correct</div>
     </div>
     <div class="stat">
-      <div class="stat-label">progress</div>
+      <div class="stat-value" id="statSkipped">0</div>
+      <div class="stat-label">skipped</div>
+    </div>
+    <div class="stat">
       <div class="stat-value" id="statProgress">0%</div>
+      <div class="stat-label">progress</div>
     </div>
-  </div>
-
-  <div class="surah-panel">
-    <select id="surahSelect">
-      <option value="">Select Surah</option>
-    </select>
-    <button class="btn-icon" id="restartBtn" title="Restart">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-    </button>
-    <button class="btn-icon" id="settingsBtn" title="Settings">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-    </button>
   </div>
 </header>
 
-<div class="container">
-  <div class="status-badge" id="statusBadge">
+<div class="main">
+
+  <div class="surah-selector">
+    <select id="surahSelect">
+      <option value="">— select surah —</option>
+    </select>
+    <button class="btn-restart" id="restartBtn" style="display:none">↺ restart</button>
+  </div>
+
+  <div class="progress-bar" id="progressBar" style="display:none">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <div class="status" id="status">
     <div class="status-dot"></div>
-    <span id="statusText">Select a surah</span>
+    <span id="statusText">select a surah to begin</span>
   </div>
 
-  <div class="ayah-label" id="ayahLabel">Ready</div>
-
-  <div class="words-viewport" id="wordsContainer">
-    <!-- Lines injected here -->
-  </div>
-</div>
-
-<div class="controls-dock" id="controlsDock">
-  <div class="stat" style="width: 80px">
-    <div class="stat-label">correct</div>
-    <div class="stat-value" id="dockCorrect" style="color: var(--correct)">0</div>
+  <div class="ayah-label" id="ayahLabel"></div>
+  <div class="words-container" id="wordsContainer">
   </div>
 
-  <button class="mic-btn" id="micBtn">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
-      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-      <line x1="12" y1="19" x2="12" y2="23"/>
-      <line x1="8" y1="23" x2="16" y2="23"/>
-    </svg>
-  </button>
-
-  <div class="stat" style="width: 80px; align-items: flex-end;">
-    <div class="stat-label">skipped</div>
-    <div class="stat-value" id="dockSkipped" style="color: var(--incorrect)">0</div>
-  </div>
-</div>
-
-<div class="completion-overlay" id="completion">
-  <div class="completion-card">
-    <div class="completion-title">ما شاء الله</div>
-    <p style="color: var(--text-muted); letter-spacing: 1px">SURAH COMPLETE</p>
-    
-    <div class="stats-grid">
-      <div class="grid-item">
-        <div class="grid-val" id="finalCorrect">0</div>
-        <div class="grid-label">Correct</div>
+  <div class="completion" id="completion">
+    <div class="completion-title">أحسنت 🌙</div>
+    <div class="completion-stats">
+      <div class="c-stat">
+        <div class="c-stat-value" id="finalCorrect">0</div>
+        <div class="c-stat-label">correct</div>
       </div>
-      <div class="grid-item">
-        <div class="grid-val" id="finalAccuracy">0%</div>
-        <div class="grid-label">Accuracy</div>
+      <div class="c-stat">
+        <div class="c-stat-value" id="finalSkipped">0</div>
+        <div class="c-stat-label">skipped</div>
       </div>
-      <div class="grid-item">
-        <div class="grid-val" id="finalSkipped">0</div>
-        <div class="grid-label">Skipped</div>
+      <div class="c-stat">
+        <div class="c-stat-value" id="finalAccuracy">0%</div>
+        <div class="c-stat-label">accuracy</div>
       </div>
     </div>
+  </div>
 
-    <button class="btn-restart" id="finalRestart" style="margin-top: 64px; background: var(--accent); color: var(--bg); border: none; padding: 16px 48px; border-radius: 12px; font-weight: 600; cursor: pointer; transform: scale(1); transition: 0.2s;">
-      RECITE AGAIN
+  <div class="controls">
+    <button class="mic-btn" id="micBtn" style="display:none" title="Start / Stop listening">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+        <line x1="12" y1="19" x2="12" y2="23"/>
+        <line x1="8" y1="23" x2="16" y2="23"/>
+      </svg>
     </button>
+    <div class="hint" id="micHint" style="display:none">click mic or press space</div>
   </div>
-</div>
 
-<div class="modal-overlay" id="settingsModal">
-  <div class="modal">
-    <div class="modal-title">Settings</div>
-    <div class="setting-row">
-      <span class="setting-label">Arabic Font Size</span>
-      <input type="range" id="fontSizeRange" min="32" max="64" value="42">
-    </div>
-    <div class="setting-row">
-      <span class="setting-label">Audio Feedback</span>
-      <label class="switch">
-        <input type="checkbox" id="audioToggle" checked>
-      </label>
-    </div>
-    <button id="closeSettings" style="width: 100%; margin-top: 20px; padding: 12px; background: var(--border); border: none; border-radius: 12px; color: var(--text-bright); cursor: pointer;">Close</button>
-  </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<div class="shortcuts-hint">
-  <span><span class="key-cap">Space</span> Mic</span>
-  <span><span class="key-cap">Shift</span> + <span class="key-cap">R</span> Restart</span>
+<div class="shortcuts">
+  <span><span class="key">space</span> mic on/off</span>
+  <span><span class="key">tab</span> restart</span>
 </div>
 
 <script>
 // ──────────────────────────────────────────────────────────────
 // 👇 SET YOUR QUL JSON FILE PATH HERE
 const QUL_JSON_PATH = 'qpc-hafs-word-by-word.json';
+const FONTS_DIR = 'fonts/'; // folder containing p1.woff2 ... p604.woff2
 // ──────────────────────────────────────────────────────────────
+
+// ── Surah → Start Page mapping (Madina Mushaf / Hafs) ────────
+const SURAH_START_PAGES = [
+  1,2,50,77,103,128,151,177,187,208,
+  221,235,249,262,267,282,293,305,312,322,
+  332,342,350,359,367,377,385,396,404,411,
+  415,418,428,434,440,446,453,458,467,477,
+  483,489,496,503,507,511,515,519,523,526,
+  529,531,535,537,539,542,544,546,549,551,
+  553,554,556,558,560,562,564,566,568,570,
+  572,574,575,577,578,580,582,582,583,584,
+  585,586,587,587,588,589,590,591,591,592,
+  593,593,594,595,595,596,596,597,597,598,
+  598,599,599,600,601,601,601,602,602,603,
+  603,603,604,604
+];
+
+// Returns page number for a given surah (1-indexed)
+function getPageForSurah(surahNum) {
+  return SURAH_START_PAGES[surahNum - 1] || 1;
+}
+
+// Returns page number for a given surah+ayah
+// Approximates by using surah start page + ayah offset heuristic
+// For a recite-along app this is accurate enough since we just need the font
+let ayahPageCache = {};
+function getPageForAyah(surahNum, ayahNum) {
+  const key = surahNum + ':' + ayahNum;
+  if (ayahPageCache[key]) return ayahPageCache[key];
+  // Use surah start page as base — font will be correct for most of surah
+  // For longer surahs the page may differ by a few but font is consistent per juz
+  return SURAH_START_PAGES[surahNum - 1] || 1;
+}
+
+// ── Dynamically load page font ───────────────────────────────
+let loadedFonts = new Set();
+let currentFontPage = -1;
+
+function loadPageFont(pageNum) {
+  if (pageNum === currentFontPage) return Promise.resolve();
+  currentFontPage = pageNum;
+
+  const fontName = 'QCFPage' + pageNum;
+  const fontUrl = FONTS_DIR + 'p' + pageNum + '.woff2';
+
+  // Inject @font-face
+  document.getElementById('dynamicFont').textContent = `
+    @font-face {
+      font-family: '${fontName}';
+      src: url('${fontUrl}') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+  `;
+
+  // Apply to all ayah lines
+  document.querySelectorAll('.ayah-line').forEach(el => {
+    el.style.fontFamily = fontName + ", 'Amiri', serif";
+  });
+
+  // Store for buildLine to use
+  window._currentPageFont = fontName;
+  return Promise.resolve();
+}
 
 // ── Surah metadata ───────────────────────────────────────────
 const SURAHS = [
@@ -690,63 +625,27 @@ let skippedCount = 0;
 let isListening = false;
 let recognition = null;
 let isComplete = false;
-let wrongIdx = -1;
-let currentSegmentIdx = -1;
-let tokensMatchedInSegment = 0;
-
-// Settings & Persistence
-let settings = {
-  fontSize: 42,
-  audioEnabled: true,
-  lastSurah: localStorage.getItem('tilawa_last_surah') || ""
-};
+let wrongIdx = -1; // index of last incorrectly recited word
+let micStartTime = 0;
+let lastAdvancedTranscript = ""; // transcript that last caused an advance — ignore if fired again
 
 // ── DOM ──────────────────────────────────────────────────────
 const surahSelect    = document.getElementById('surahSelect');
 const wordsContainer = document.getElementById('wordsContainer');
 const micBtn         = document.getElementById('micBtn');
-const statusBadge    = document.getElementById('statusBadge');
+const statusEl       = document.getElementById('status');
 const statusText     = document.getElementById('statusText');
-const statsBar       = document.getElementById('statsBar');
-const statAccuracy   = document.getElementById('statAccuracy');
-const statProgress   = document.getElementById('statProgress');
-const dockCorrect    = document.getElementById('dockCorrect');
-const dockSkipped    = document.getElementById('dockSkipped');
 const progressFill   = document.getElementById('progressFill');
+const progressBar    = document.getElementById('progressBar');
+const statsBar       = document.getElementById('statsBar');
+const statCorrect    = document.getElementById('statCorrect');
+const statSkipped    = document.getElementById('statSkipped');
+const statProgress   = document.getElementById('statProgress');
 const restartBtn     = document.getElementById('restartBtn');
-const settingsBtn    = document.getElementById('settingsBtn');
-const settingsModal  = document.getElementById('settingsModal');
-const closeSettings  = document.getElementById('closeSettings');
-const fontSizeRange  = document.getElementById('fontSizeRange');
-const audioToggle    = document.getElementById('audioToggle');
 const completion     = document.getElementById('completion');
+const micHint        = document.getElementById('micHint');
+const toastEl        = document.getElementById('toast');
 const ayahLabel      = document.getElementById('ayahLabel');
-const header         = document.getElementById('header');
-const controlsDock   = document.getElementById('controlsDock');
-
-// ── Init State ───────────────────────────────────────────────
-function loadSettings() {
-  const saved = localStorage.getItem('tilawa_settings');
-  if (saved) {
-    settings = { ...settings, ...JSON.parse(saved) };
-    fontSizeRange.value = settings.fontSize;
-    audioToggle.checked = settings.audioEnabled;
-    applySettings();
-  }
-}
-
-function saveSettings() {
-  localStorage.setItem('tilawa_settings', JSON.stringify(settings));
-  applySettings();
-}
-
-function applySettings() {
-  document.documentElement.style.setProperty('--font-size-arabic', settings.fontSize + 'px');
-  // Update existing lines if any
-  document.querySelectorAll('.ayah-line').forEach(line => {
-    line.style.fontSize = settings.fontSize + 'px';
-  });
-}
 
 // ── Populate surah list ──────────────────────────────────────
 SURAHS.forEach(s => {
@@ -756,21 +655,24 @@ SURAHS.forEach(s => {
   surahSelect.appendChild(opt);
 });
 
-if (settings.lastSurah) {
-  surahSelect.value = settings.lastSurah;
-  setTimeout(() => loadSurah(settings.lastSurah), 100);
-}
-
 // ── Normalize ────────────────────────────────────────────────
+// Only strip diacritics + unify alef forms — nothing else
 function normalize(text) {
+  if (!text) return '';
   return text
-    .replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED]/g, '')
-    .replace(/[\u0671\u0622\u0623\u0625\u0627]/g, '\u0627')
-    .replace(/\u0629/g, '\u0647')
-    .replace(/\u0649/g, '\u064A')
-    .trim();
+    // Layer 1: Standard tashkeel (fatha, damma, kasra, sukun, shadda, tanween)
+    .replace(/[ً-ْ]/g, '')
+    // Layer 2: Special Uthmani/KFGQPC marks (stop signs, small letters, sajdah etc.)
+    .replace(/[ؐ-ؚۖ-ۜ۟-۪ۨ-ٰۭ]/g, '')
+    // Layer 3: Normalize alif variants to plain alif (STT always returns bare alif)
+    .replace(/[ٱآأإا]/g, 'ا')
+    // Layer 4: Ta marbuta to ha (pause = ha sound, STT transcribes as ha)
+    .replace(/ة/g, 'ه')
+    // Layer 5: Alif maqsura to ya (used interchangeably in digital text)
+    .replace(/ى/g, 'ي')
+    .trim()
+    .replace(/\s+/g, ' ');
 }
-
 // ── Levenshtein similarity ───────────────────────────────────
 function levenshtein(a, b) {
   const m = a.length, n = b.length;
@@ -795,14 +697,13 @@ function isAyahMarker(text) {
 // ── Ayah number SVG circle ───────────────────────────────────
 function makeAyahMarker(num) {
   const arNum = String(num).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-  return `<span class="ayah-marker"><svg viewBox="0 0 36 36" fill="none" style="position:absolute;width:100%;height:100%"><path d="M18 2.5 C26.5 2.5 33.5 9.5 33.5 18 C33.5 26.5 26.5 33.5 18 33.5 C9.5 33.5 2.5 26.5 2.5 18 C2.5 9.5 9.5 2.5 18 2.5 Z" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.4"/></svg><span>${arNum}</span></span>`;
+  return `<span class="ayah-marker"><svg viewBox="0 0 36 36" fill="none"><path d="M18 2 C26 2 34 8 34 18 C34 28 26 34 18 34 C10 34 2 28 2 18 C2 8 10 2 18 2 Z" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/></svg><span>${arNum}</span></span>`;
 }
 
 // ── Audio feedback ───────────────────────────────────────────
 let audioCtx = null;
 function getACtx() { if (!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
-function playTone(freq, dur, vol=0.1) {
-  if (!settings.audioEnabled) return;
+function playTone(freq, dur, vol=0.12) {
   try {
     const ctx = getACtx(), osc = ctx.createOscillator(), g = ctx.createGain();
     osc.connect(g); g.connect(ctx.destination);
@@ -811,13 +712,13 @@ function playTone(freq, dur, vol=0.1) {
     osc.start(); osc.stop(ctx.currentTime + dur);
   } catch(e) {}
 }
-function playCorrect() { playTone(880, 0.08); setTimeout(()=>playTone(1100,0.1,0.06), 80); }
+function playCorrect() { playTone(880, 0.08); setTimeout(()=>playTone(1100,0.1,0.07),80); }
 function playIncorrect() { playTone(220, 0.15); }
 
 // ── Load surah ───────────────────────────────────────────────
 async function loadSurah(surahNum) {
-  setStatus('Loading surah...', false);
-  wordsContainer.innerHTML = '<div style="color:var(--text-muted); font-size: 14px; letter-spacing: 2px">PREPARING AYAH...</div>';
+  setStatus('loading...', false);
+  wordsContainer.innerHTML = '<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--text-muted);font-size:13px;letter-spacing:1px">loading...</span>';
   try {
     const res = await fetch(QUL_JSON_PATH);
     if (!res.ok) throw new Error('File not found: ' + QUL_JSON_PATH);
@@ -840,11 +741,10 @@ async function loadSurah(surahNum) {
       cur.words.push(w);
     });
 
-    localStorage.setItem('tilawa_last_surah', surahNum);
     initRecitation();
   } catch(e) {
-    wordsContainer.innerHTML = `<div style="color:var(--incorrect)">Error: ${e.message}</div>`;
-    setStatus('Error loading', false);
+    wordsContainer.innerHTML = `<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#9e5a5a;font-size:13px">error: ${e.message}</span>`;
+    setStatus('error', false);
   }
 }
 
@@ -854,24 +754,22 @@ function initRecitation() {
   correctCount = 0; skippedCount = 0;
   isComplete = false;
   wrongIdx = -1;
-  currentSegmentIdx = -1;
-  tokensMatchedInSegment = 0;
-
+  lastAdvancedTranscript = "";
   words.forEach(w => w.status = null);
   renderLines(); updateStats();
+  progressBar.style.display = 'block';
+  statsBar.style.display = 'flex';
+  micBtn.style.display = 'flex';
+  micHint.style.display = 'block';
+  restartBtn.style.display = 'inline-block';
   completion.classList.remove('show');
-  setStatus('Ready to begin', false);
-  
-  // Exit focus mode on init
-  header.classList.remove('focus-mode');
-  controlsDock.classList.remove('focus-mode');
+  setStatus('ready — press mic to start', false);
 }
 
 // ── Render lines ─────────────────────────────────────────────
 function buildLine(ayahObj) {
   const line = document.createElement('div');
   line.className = 'ayah-line';
-  line.style.fontSize = settings.fontSize + 'px';
   ayahObj.words.forEach(w => {
     const span = document.createElement('span');
     span.className = 'word';
@@ -890,7 +788,6 @@ function renderLines() {
   const prev = ayahs[currentAyahIdx - 1];
   const curr = ayahs[currentAyahIdx];
   const next = ayahs[currentAyahIdx + 1];
-  
   if (prev) { const el = buildLine(prev); el.classList.add('line-prev'); wordsContainer.appendChild(el); }
   if (curr) {
     const el = buildLine(curr); el.classList.add('line-current'); wordsContainer.appendChild(el);
@@ -898,10 +795,9 @@ function renderLines() {
     if (wEl) wEl.classList.add('current');
   }
   if (next) { const el = buildLine(next); el.classList.add('line-next'); wordsContainer.appendChild(el); }
-  
   if (curr) {
     const s = SURAHS.find(s => s.n === parseInt(surahSelect.value));
-    ayahLabel.textContent = s ? `${s.ar} · Ayah ${curr.ayahNum}` : `Ayah ${curr.ayahNum}`;
+    ayahLabel.textContent = s ? `${s.ar} · ayah ${curr.ayahNum} of ${ayahs.length}` : `ayah ${curr.ayahNum}`;
   }
 }
 
@@ -916,117 +812,108 @@ function updateWordEl(idx, cls) {
 function advanceWord(wasCorrect) {
   words[currentIdx].status = wasCorrect ? 'correct' : 'incorrect';
   updateWordEl(currentIdx, wasCorrect ? 'correct' : 'incorrect');
-  
-  if (wasCorrect) { 
-    correctCount++; 
-    // playCorrect(); // Silenced
-  } else { 
-    skippedCount++; 
-    playIncorrect(); 
-  }
-  
+  if (wasCorrect) { correctCount++; playCorrect(); }
+  else { skippedCount++; playIncorrect(); }
   currentIdx++;
   updateStats();
-  
-  if (currentIdx >= words.length) { 
-    finishRecitation(); 
-    return; 
-  }
-  
+  if (currentIdx >= words.length) { finishRecitation(); return; }
   const nextWord = words[currentIdx];
   if (nextWord.ayah !== ayahs[currentAyahIdx].ayahNum) {
     currentAyahIdx++;
+    // Check if page changed — load new font if needed
+    const newAyah = ayahs[currentAyahIdx];
+    if (newAyah) {
+      const newPage = getPageForAyah(newAyah.words[0].ayah <= 0 ? 1 : parseInt(surahSelect.value), newAyah.ayahNum);
+      loadPageFont(newPage);
+    }
     renderLines();
   } else {
     updateWordEl(currentIdx, 'current');
   }
-  
-  // Enter Focus Mode when reciting
-  if (isListening) {
-    header.classList.add('focus-mode');
-    controlsDock.classList.add('focus-mode');
-  }
+  feedGrammarHint();
+}
+
+// ── Grammar hint ─────────────────────────────────────────────
+function feedGrammarHint() {
+  if (!recognition || currentIdx >= words.length) return;
+  try {
+    const SGL = window.SpeechGrammarList || window.webkitSpeechGrammarList;
+    if (SGL) {
+      const gl = new SGL();
+      gl.addFromString(`#JSGF V1.0; grammar word; public <word> = ${normalize(words[currentIdx].text)};`, 1);
+      recognition.grammars = gl;
+    }
+  } catch(e) {}
 }
 
 // ── Word matching ────────────────────────────────────────────
 function isMatch(a, b) {
+  if (!a || !b) return false;
+  // Exact match
   if (a === b) return true;
-  if (similarity(a, b) >= 0.92) return true;
-  return false;
+  // Inclusion match — handles STT returning phrase containing the word
+  if (a.includes(b) || b.includes(a)) return true;
+  // Fuzzy fallback — handles minor transcription noise (1 char diff = ~0.8+ on short words)
+  return similarity(a, b) >= 0.80;
 }
 
-function matchWord(tokens) {
+// token    = single word from STT (last token only)
+// isFinal  = whether STT has finalized this result
+function matchWord(token, isFinal) {
   if (currentIdx >= words.length) return;
 
-  tokens.forEach((token) => {
-    const tokenNorm = normalize(token);
-    if (!tokenNorm || tokenNorm.length < 1) return;
+  const tokenNorm = normalize(token);
+  if (!tokenNorm || tokenNorm.length < 1) return;
 
-    const currentWord = words[currentIdx];
-    const targetNorm = normalize(currentWord.text);
-    const sim = similarity(tokenNorm, targetNorm);
+  const currentWord = words[currentIdx];
+  const targetNorm = normalize(currentWord.text);
 
-    // 0. Overlap Protection
-    if (currentIdx > 0 && words[currentIdx-1].status === 'correct') {
-      if (isMatch(tokenNorm, normalize(words[currentIdx-1].text))) return;
-    }
-
-    // 1. Check for correction of a previously failed (red) word
-    if (currentWord.status === 'incorrect') {
-      if (sim >= 0.92) {
-        currentWord.status = 'correct';
-        correctCount++;
-        skippedCount--;
-        updateWordEl(currentIdx, 'correct');
-        // No sound for correct
-        // Now advance to the next word
-        currentIdx++;
-        updateStats();
-        if (currentIdx >= words.length) { finishRecitation(); return; }
-        
-        if (words[currentIdx].ayah !== ayahs[currentAyahIdx].ayahNum) {
-          currentAyahIdx++;
-          renderLines();
-        } else {
-          updateWordEl(currentIdx, 'current');
-        }
-        return;
+  // ── Case 1: Current word already marked red (retry mode) ──
+  // User is trying to correct a previously failed word
+  if (currentWord.status === 'incorrect') {
+    if (isMatch(tokenNorm, targetNorm)) {
+      // Corrected! Turn green and advance
+      currentWord.status = 'correct';
+      correctCount++;
+      skippedCount--;
+      updateWordEl(currentIdx, 'correct');
+      playCorrect();
+      currentIdx++;
+      updateStats();
+      if (currentIdx >= words.length) { finishRecitation(); return; }
+      if (words[currentIdx].ayah !== ayahs[currentAyahIdx].ayahNum) {
+        currentAyahIdx++;
+        renderLines();
+      } else {
+        updateWordEl(currentIdx, 'current');
+      }
+      if (isListening) {
+        header.classList.add('focus-mode');
+        controlsDock.classList.add('focus-mode');
       }
     }
+    // If still wrong, just wait — no action on interim wrong attempts
+    return;
+  }
 
-    // 2. Strict Match for Current Word
-    if (sim >= 0.92) {
-      advanceWord(true);
-      return;
-    }
+  // ── Case 2: Correct match — advance ──────────────────────
+  if (isMatch(tokenNorm, targetNorm)) {
+    advanceWord(true);
+    return;
+  }
 
-    // 3. Handle Mispronunciation (Mark red, stay on word)
-    // Only trigger if similarity is too low but we haven't already marked it red
-    if (sim < 0.85 && currentWord.status !== 'incorrect') {
-        currentWord.status = 'incorrect';
-        skippedCount++;
-        updateWordEl(currentIdx, 'incorrect');
-        playIncorrect();
-        updateStats();
-        // DO NOT advance currentIdx
-        return;
-    }
-
-    // 4. Lookahead Skip (Strictly manual or via significant pause? 
-    // User wants "dont advance", so we disable auto-skipping for now)
-    /*
-    const lookaheadIdx = currentIdx + 1;
-    if (lookaheadIdx < words.length) {
-      if (similarity(tokenNorm, normalize(words[lookaheadIdx].text)) >= 0.92) {
-        wrongIdx = currentIdx;
-        advanceWord(false); 
-        advanceWord(true);  
-        return;
-      }
-    }
-    */
-  });
+  // ── Case 3: Wrong — only act on final results ─────────────
+  // Never mark red on interim — STT is still building the word
+  if (isFinal) {
+    // Mark red, stay on word — user must retry
+    currentWord.status = 'incorrect';
+    skippedCount++;
+    updateWordEl(currentIdx, 'incorrect');
+    playIncorrect();
+    updateStats();
+  }
 }
+
 
 // ── Speech recognition ───────────────────────────────────────
 function setupRecognition() {
@@ -1036,21 +923,33 @@ function setupRecognition() {
   recognition.lang = 'ar-SA';
   recognition.continuous = true;
   recognition.interimResults = true;
-  recognition.maxAlternatives = 1;
-  
+  recognition.maxAlternatives = 3;
+
   recognition.onresult = (e) => {
     for (let i = e.resultIndex; i < e.results.length; i++) {
-        const transcript = e.results[i][0].transcript;
-        if (i > currentSegmentIdx) {
-            currentSegmentIdx = i;
-            tokensMatchedInSegment = 0;
-        }
-        const tokens = transcript.trim().split(/\s+/).filter(t => t.length >= 1);
-        if (tokens.length > tokensMatchedInSegment) {
-            const newTokens = tokens.slice(tokensMatchedInSegment);
-            matchWord(newTokens);
-            tokensMatchedInSegment = tokens.length;
-        }
+      const isFinal = e.results[i].isFinal;
+
+      // Collect all alternatives into one pool
+      let bestTranscript = '';
+      let bestSim = -1;
+      const expectedNorm = currentIdx < words.length ? normalize(words[currentIdx].text) : '';
+
+      for (let alt = 0; alt < e.results[i].length; alt++) {
+        const t = e.results[i][alt].transcript.trim();
+        // Pick the alternative that best matches current expected word
+        const tokens = t.split(/\s+/).filter(Boolean);
+        const lastToken = tokens[tokens.length - 1] || '';
+        const s = similarity(normalize(lastToken), expectedNorm);
+        if (s > bestSim) { bestSim = s; bestTranscript = t; }
+      }
+
+      if (!bestTranscript) continue;
+
+      // Always use only the LAST token — the most recently spoken word
+      const tokens = bestTranscript.trim().split(/\s+/).filter(Boolean);
+      const lastToken = tokens[tokens.length - 1];
+
+      if (lastToken) matchWord(lastToken, isFinal);
     }
   };
 
@@ -1062,48 +961,37 @@ function setupRecognition() {
 
   recognition.onend = () => {
     if (isListening && !isComplete) {
-      try { 
-        currentSegmentIdx = -1;
-        tokensMatchedInSegment = 0;
-        recognition.start(); 
-      } catch(e) {}
+      try { recognition.start(); } catch(e) {}
     }
   };
   return true;
 }
+
 
 // ── Controls ─────────────────────────────────────────────────
 function toggleListening() {
   if (isComplete || !words.length) return;
   isListening ? stopListening() : startListening();
 }
-
 function startListening() {
   if (!recognition && !setupRecognition()) return;
   try {
-    currentSegmentIdx = -1;
-    tokensMatchedInSegment = 0;
+    feedGrammarHint();
     recognition.start();
+    micStartTime = Date.now();
     isListening = true;
     micBtn.classList.add('active');
-    statusBadge.classList.add('listening');
-    setStatus('LISTENING', true);
+    setStatus('listening', true);
   } catch(e) {}
 }
-
 function stopListening() {
-  if (recognition) { 
-    try { recognition.stop(); } catch(e) {} 
-    recognition = null;
-  }
+  if (recognition) { try { recognition.stop(); } catch(e) {} }
   isListening = false;
   micBtn.classList.remove('active');
-  statusBadge.classList.remove('listening');
-  header.classList.remove('focus-mode');
-  controlsDock.classList.remove('focus-mode');
-  setStatus('PAUSED', false);
+  setStatus('paused — press mic to resume', false);
 }
 
+// ── Finish ───────────────────────────────────────────────────
 function finishRecitation() {
   stopListening(); isComplete = true;
   const total = correctCount + skippedCount;
@@ -1112,65 +1000,44 @@ function finishRecitation() {
   document.getElementById('finalSkipped').textContent = skippedCount;
   document.getElementById('finalAccuracy').textContent = accuracy + '%';
   completion.classList.add('show');
-  setStatus('COMPLETE', false);
-  showToast('ما شاء الله — Surah Complete!');
+  setStatus('surah complete!', false);
+  showToast('ما شاء الله — surah complete!');
 }
 
+// ── Stats / status / toast ───────────────────────────────────
 function updateStats() {
-  const total = correctCount + skippedCount;
-  const acc = total > 0 ? Math.round((correctCount/total)*100) : 0;
-  const prog = words.length > 0 ? Math.round((currentIdx/words.length)*100) : 0;
-  
-  statAccuracy.textContent = acc + '%';
-  statProgress.textContent = prog + '%';
-  dockCorrect.textContent = correctCount;
-  dockSkipped.textContent = skippedCount;
+  const pct = words.length > 0 ? Math.round((currentIdx/words.length)*100) : 0;
+  statCorrect.textContent = correctCount;
+  statSkipped.textContent = skippedCount;
+  statProgress.textContent = pct + '%';
+  progressFill.style.width = pct + '%';
 }
-
 function setStatus(msg, listening) {
   statusText.textContent = msg;
+  statusEl.className = 'status' + (listening ? ' listening' : '');
 }
-
 let toastTimer;
 function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2500);
 }
 
 // ── Events ───────────────────────────────────────────────────
 surahSelect.addEventListener('change', () => {
   const val = surahSelect.value; if (!val) return;
-  stopListening(); loadSurah(val);
+  stopListening(); loadSurah(parseInt(val));
 });
-
 micBtn.addEventListener('click', toggleListening);
 restartBtn.addEventListener('click', () => { stopListening(); initRecitation(); });
-finalRestart.addEventListener('click', () => { stopListening(); initRecitation(); });
-
-settingsBtn.addEventListener('click', () => settingsModal.style.display = 'flex');
-closeSettings.addEventListener('click', () => { settingsModal.style.display = 'none'; saveSettings(); });
-
-fontSizeRange.addEventListener('input', (e) => {
-  settings.fontSize = parseInt(e.target.value);
-  applySettings();
-});
-
-audioToggle.addEventListener('change', (e) => {
-  settings.audioEnabled = e.target.checked;
-  saveSettings();
-});
-
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space' && words.length) { e.preventDefault(); toggleListening(); }
-  if (e.shiftKey && e.code === 'KeyR' && words.length) { e.preventDefault(); stopListening(); initRecitation(); }
+  if (e.code === 'Tab' && words.length) { e.preventDefault(); stopListening(); initRecitation(); }
 });
 
-// ── Init ─────────────────────────────────────────────────────
-loadSettings();
+// ── Init display ─────────────────────────────────────────────
+wordsContainer.innerHTML = '<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--text-muted);font-family:var(--font-ui);font-size:14px;letter-spacing:1px">select a surah to begin</span>';
 </script>
-
 </body>
 </html>
